@@ -1,0 +1,19 @@
+{
+    "name": "scrimmy/tjs",
+    "description": "A library that allows you to throw a JS object out of PHPA library that allows you to throw out a JS object with values from PHP",
+    "type": "library",
+    "license": "GPLv2",
+    "autoload": {
+        "psr-4": {
+            "Scrimmy\\Tjs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kirill"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    }
+}
