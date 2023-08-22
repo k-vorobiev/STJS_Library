@@ -1,7 +1,7 @@
 
-# Scrimmy Throw JavaScript Bundle
+# Scrimmy Throw JavaScript Library
 
-Данный пакет позволяет выбрасывать любые данные скалярного типа в виде JavaScript объектов из PHP
+Данная библиотека позволяет выбрасывать любые данные скалярного типа в виде JavaScript объектов из PHP
 ## Установка
 
 Добавьте в свой composer.json репозиторий скрипта:
