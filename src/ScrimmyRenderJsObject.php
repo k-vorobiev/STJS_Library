@@ -14,16 +14,16 @@ class ScrimmyRenderJsObject
     public function renderJSObject(string $object_name, array $values): string
     {
         if (empty($object_name)) {
-            return "";
+            return '';
         }
 
-        $data = array();
+        $data = [];
 
         if (!empty($values)) {
             $data = $this->decodeHTML($values);
         }
 
-        $script = sprintf("let %s = %s;", $object_name, $this->encodeData($data));
+        $script = sprintf('let %s = %s;', $object_name, $this->encodeData($data));
 
         return $this->wrapScript($script);
     }
@@ -36,7 +36,7 @@ class ScrimmyRenderJsObject
      */
     private function decodeHTML(array $values): array|string
     {
-        $script = array();
+        $script = [];
 
         foreach ($values as $key => $value) {
             if (!is_scalar($value))
@@ -69,6 +69,6 @@ class ScrimmyRenderJsObject
      */
     private function wrapScript(string $script): string
     {
-        return sprintf(/** @lang text */ "<script>/* <![CDATA[ */ %s /* ]]> */</script>", $script);
+        return sprintf(/** @lang text */ '<script>/* <![CDATA[ */ %s /* ]]> */</script>', $script);
     }
 }
