@@ -9,28 +9,23 @@ class STJS_Script
      *
      * @param string $object_name
      * @param array $values
-     * @param bool $return
-     * @return false|string|void
+     * @return string
      */
-    public function throw_script(string $object_name, array $values, bool $echo = false)
+    public function toJSObject(string $object_name, array $values): string
     {
         if ( empty($object_name) ) {
-            return false;
+            return "";
         }
 
         $data = array();
 
         if ( !empty($values) ) {
-            $data = $this->decode_html($values);
+            $data = $this->decodeHTML($values);
         }
 
-        $script = sprintf('let %s = %s;', $object_name, $this->encode_data($data));
+        $script = sprintf("let %s = %s;", $object_name, $this->encodeData($data));
 
-        if ( !$echo ) {
-            return $this->wrap_script($script);
-        } else {
-            echo $this->wrap_script($script);
-        }
+        return $this->wrapScript($script);
     }
 
     /**
@@ -39,7 +34,7 @@ class STJS_Script
      * @param array $values
      * @return array|string
      */
-    private function decode_html(array $values): array|string
+    private function decodeHTML(array $values): array|string
     {
         $script = array();
 
@@ -59,7 +54,7 @@ class STJS_Script
      * @param string|array $data
      * @return bool|string
      */
-    private function encode_data(string|array $data): bool|string
+    private function encodeData(string|array $data): bool|string
     {
         $json = json_encode($data);
 
@@ -72,7 +67,7 @@ class STJS_Script
      * @param string $script
      * @return string
      */
-    private function wrap_script(string $script): string
+    private function wrapScript(string $script): string
     {
         $before = "<script>\n/* <![CDATA[ */\n";
         $after = "\n/* ]]> */\n</script>";
