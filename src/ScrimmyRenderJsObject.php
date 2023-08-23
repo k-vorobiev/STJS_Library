@@ -32,9 +32,9 @@ class ScrimmyRenderJsObject
      * A method that allows you to convert HTML entities in a string to their corresponding characters
      *
      * @param array $values
-     * @return array|string
+     * @return array
      */
-    private function decodeHTML(array $values): array|string
+    private function decodeHTML(array $values): array
     {
         $script = [];
 
@@ -45,16 +45,16 @@ class ScrimmyRenderJsObject
             $script[$key] = html_entity_decode((string) $value, ENT_QUOTES, 'UTF-8');
         }
 
-        return !empty($script) ? $script : '';
+        return $script;
     }
 
     /**
      * A method that allows you to encrypt data in JSON, or return an empty string for security
      *
-     * @param string|array $data
+     * @param array $data
      * @return string
      */
-    private function encodeData(string|array $data): string
+    private function encodeData(array $data): string
     {
         $json = json_encode($data);
 
