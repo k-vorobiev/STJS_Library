@@ -1,5 +1,5 @@
 
-# Scrimmy Throw JavaScript Library
+# Scrimmy Render JavaScript Object Library
 
 Данная библиотека позволяет выбрасывать любые данные скалярного типа в виде JavaScript объектов из PHP
 ## Установка
@@ -22,29 +22,25 @@ composer require scrimmy/tjs:dev-master
 ```
 ## Использование
 
-Создаем экзепляр класса `STJS_Script()`, а затем вызываем метод `throw_script`, в который передаём: имя объекта, массив значений объекта.
+Создаем экзепляр класса `ScrimmyRenderJsObject()`, а затем вызываем метод `renderJSObject`, в который передаём: имя объекта, массив значений объекта.
 
 Пример:
 
 ```
-$STJS = new STJS_Script();
+$STJS = new ScrimmyRenderJsObject();
 
 $args = array(
     'example' => 'exampleValue',
     'example2' => 10,
 );
 
-$script = $STJS->throw_script('my_object', $args);
+$script = $STJS->renderJSObject('my_object', $args);
 ```
 
 Выводим переменную `$script` в `<head>` или любом другом месте и получаем следующую HTML-разметку
 
 ```
-<script>
-/* <![CDATA[ */
-	let my_object = {"example":"exampleValue","example2":"10"};
-/* ]]> */
-</script>
+<script>/* <![CDATA[ */ let my_object = {"example":"exampleValue","example2":"10"}; /* ]]> */</script>
 ```
 
 Теперь нам доступен объект `my_object` со свойствами `example` и `example2`
