@@ -2,7 +2,7 @@
 
 namespace Scrimmy\Tjs;
 
-class STJS_Script
+class ScrimmyRenderJsObject
 {
     /**
      * A method that allows you to throw out a script with an object containing data
@@ -11,15 +11,15 @@ class STJS_Script
      * @param array $values
      * @return string
      */
-    public function toJSObject(string $object_name, array $values): string
+    public function renderJSObject(string $object_name, array $values): string
     {
-        if ( empty($object_name) ) {
+        if (empty($object_name)) {
             return "";
         }
 
         $data = array();
 
-        if ( !empty($values) ) {
+        if (!empty($values)) {
             $data = $this->decodeHTML($values);
         }
 
@@ -38,11 +38,11 @@ class STJS_Script
     {
         $script = array();
 
-        foreach ( $values as $key => $value ) {
-            if ( !is_scalar($value) )
+        foreach ($values as $key => $value) {
+            if (!is_scalar($value))
                 continue;
 
-            $script[$key] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8');
+            $script[$key] = html_entity_decode((string) $value, ENT_QUOTES, 'UTF-8');
         }
 
         return !empty($script) ? $script : '';
@@ -52,9 +52,9 @@ class STJS_Script
      * A method that allows you to encrypt data in JSON, or return an empty string for security
      *
      * @param string|array $data
-     * @return bool|string
+     * @return string
      */
-    private function encodeData(string|array $data): bool|string
+    private function encodeData(string|array $data): string
     {
         $json = json_encode($data);
 
@@ -69,9 +69,6 @@ class STJS_Script
      */
     private function wrapScript(string $script): string
     {
-        $before = "<script>\n/* <![CDATA[ */\n";
-        $after = "\n/* ]]> */\n</script>";
-
-        return $before . "\t" . $script . $after;
+        return sprintf(/** @lang text */ "<script>/* <![CDATA[ */ %s /* ]]> */</script>", $script);
     }
 }
